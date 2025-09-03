@@ -1,0 +1,458 @@
+/* General Layout and Background */
+.property-detail-page {
+  min-height: 100vh;
+  background: linear-gradient(to bottom right, #f0fdf4, #ecfdf5);
+}
+
+.main-content-detail {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+.grid-layout {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 2rem;
+}
+
+.main-column {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.sidebar-column {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+/* Header */
+.header-detail {
+  background-color: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid #e2e8f0;
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+
+.header-container-detail {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.header-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.header-logo-text {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #1e293b;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Card and Components */
+.card-container {
+  background-color: white;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  overflow: hidden;
+}
+
+.card-content {
+  padding: 1.5rem;
+}
+
+.card-header-inner {
+  padding: 1.5rem;
+}
+
+.card-title-inner {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #1e293b;
+  margin-bottom: 1rem;
+}
+
+/* Image Gallery */
+.image-gallery {
+  position: relative;
+}
+
+.main-image {
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+  border-radius: 0.5rem 0.5rem 0 0;
+}
+
+.image-nav-button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  padding: 0.5rem;
+  cursor: pointer;
+}
+
+.image-nav-button.left {
+  left: 1rem;
+}
+
+.image-nav-button.right {
+  right: 1rem;
+}
+
+.image-badge-container {
+  position: absolute;
+  top: 1rem;
+}
+
+.image-badge-container.top-left {
+  left: 1rem;
+}
+
+.image-badge-container.top-right {
+  right: 1rem;
+}
+
+.thumbnail-container {
+  display: flex;
+  gap: 0.5rem;
+  padding: 1rem;
+  overflow: auto;
+}
+
+.thumbnail {
+  width: 80px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  opacity: 0.6;
+  border: 2px solid transparent;
+  transition: opacity 0.2s, border-color 0.2s;
+}
+
+.thumbnail.active {
+  opacity: 1;
+  border-color: #16a34a;
+}
+
+/* Property Details */
+.details-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.price {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #16a34a;
+}
+
+.address-container {
+  display: flex;
+  align-items: center;
+  color: #64748b;
+  margin-bottom: 1rem;
+}
+
+.details-grid {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  margin-bottom: 1rem;
+}
+
+.detail-item-stat {
+  display: flex;
+  align-items: center;
+  color: #64748b;
+}
+
+.stats-header-row {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  color: #64748b;
+}
+
+.stat-item {
+  display: flex;
+  align-items: center;
+}
+
+.section-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: #1e293b;
+}
+
+.description-text {
+  color: #64748b;
+  line-height: 1.6;
+}
+
+/* Mortgage Calculator */
+.calculator-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.calculator-result {
+  background-color: #f0fdf4;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  text-align: center;
+}
+
+.monthly-payment-label {
+  font-size: 0.875rem;
+  color: #16a34a;
+  margin-bottom: 0.5rem;
+}
+
+.monthly-payment-amount {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #16a34a;
+}
+
+/* Contact Card */
+.agent-profile {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.agent-icon-bg {
+  background-color: #16a34a;
+  border-radius: 50%;
+  padding: 0.75rem;
+}
+
+.agent-name {
+  font-weight: 600;
+  color: #1e293b;
+}
+
+.agent-company {
+  font-size: 0.875rem;
+  color: #64748b;
+}
+
+.contact-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.contact-form {
+  margin-top: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* Property Features & Stats */
+.feature-list, .stats-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.feature-item, .stat-row {
+  display: flex;
+  justify-content: space-between;
+}
+
+.feature-item span:first-child, .stat-label {
+  color: #64748b;
+}
+
+.feature-item span:last-child, .stat-value {
+  font-weight: 500;
+  color: #1e293b;
+}
+
+/* Utility/Common Classes */
+.text-green-600 {
+  color: #16a34a;
+}
+
+.w-8 { width: 2rem; }
+.h-8 { height: 2rem; }
+.icon-sm { height: 1rem; width: 1rem; }
+.icon-lg { height: 1.25rem; width: 1.25rem; }
+.mr-2 { margin-right: 0.5rem; }
+.button {
+  padding: 0.5rem 1rem;
+  border-radius: 0.375rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: background-color 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+  justify-content: center;
+}
+
+.button-primary {
+  background-color: #16a34a;
+  color: white;
+}
+
+.button-primary:hover {
+  background-color: #15803d;
+}
+
+.button-outline {
+  background-color: white;
+  color: #475569;
+  border-color: #e2e8f0;
+}
+
+.button-outline:hover {
+  background-color: #f8fafc;
+}
+
+.button-back {
+  width: auto;
+}
+
+.badge-sale { background-color: #16a34a; color: white; }
+.badge-rent { background-color: #059669; color: white; }
+.badge-lease { background-color: #0d9488; color: white; }
+.badge-featured { background-color: #eab308; color: white; }
+
+.input {
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  font-size: 1rem;
+  border-radius: 0.5rem;
+  border: 1px solid #d1d5db;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  margin-top: 0.25rem;
+}
+
+.input:focus {
+  border-color: #16a34a;
+  box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.2);
+}
+
+.label {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #475569;
+  margin-bottom: 0.25rem;
+}
+
+.textarea {
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  font-size: 1rem;
+  border-radius: 0.5rem;
+  border: 1px solid #d1d5db;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  min-height: 80px;
+  resize: vertical;
+}
+
+.textarea:focus {
+  border-color: #16a34a;
+  box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.2);
+}
+
+/* Loading and Not Found States */
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.loading-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.loading-spinner {
+  animation: spin 1s linear infinite;
+  border-radius: 50%;
+  height: 2rem;
+  width: 2rem;
+  border: 2px solid #d1d5db;
+  border-top-color: #16a34a;
+  margin-bottom: 1rem;
+}
+
+.loading-text {
+  color: #64748b;
+  text-align: center;
+}
+
+.not-found-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+}
+
+.not-found-icon {
+  height: 3rem;
+  width: 3rem;
+  color: #94a3b8;
+  margin-bottom: 1rem;
+}
+
+.not-found-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #1e293b;
+  margin-bottom: 0.5rem;
+}
+
+.not-found-text {
+  color: #64748b;
+  margin-bottom: 1rem;
+}
