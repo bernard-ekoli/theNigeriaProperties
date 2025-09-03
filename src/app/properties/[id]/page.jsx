@@ -89,7 +89,7 @@ export default function PropertyDetailPage() {
     if (!foundProperty) {
       // In a real app, you might use a redirect here
       // router.push("/properties")
-      setLoading(false)
+      setLoading(true)
       return
     }
 
@@ -181,8 +181,7 @@ export default function PropertyDetailPage() {
               </Button>
             </Link>
             <div className="header-logo">
-              <Home className="text-green-600 w-8 h-8" />
-              <span className="header-logo-text">TheNigeriaProperties</span>
+              <video src="/logoTest.mp4" autoPlay loop muted></video>
             </div>
           </div>
           <div className="header-right">
