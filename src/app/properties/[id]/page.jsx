@@ -199,7 +199,7 @@ export default function PropertyDetailPage() {
             <Card>
               <div className="image-gallery">
                 <img
-                  src={property.images?.[currentImageIndex] || "/placeholder.svg"}
+                  src={property.images?.[currentImageIndex] || "/placeholder.png"}
                   alt={property.title}
                   className="main-image"
                 />
