@@ -1,0 +1,476 @@
+/* src/styles/createListing.css */
+
+/* General Layout */
+.create-listing-page-container {
+    background-color: #f9fafb;
+    min-height: 100vh;
+    font-family: ui-sans-serif, system-ui, sans-serif;
+    color: #1f2937;
+}
+
+/* Header */
+.create-listing-header {
+    background: white;
+    border-bottom: 1px solid #e2e8f0;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    height: 50px;
+    overflow: hidden;
+}
+
+.create-listing-header-left {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    height: 60px;
+    overflow: hidden;
+    width: 100%;
+}
+
+.hll {
+    width: 100%;
+}
+
+.create-listing-brand {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 0.5rem;
+    text-decoration: none;
+    overflow: hidden;
+    height: 100%;
+    padding: 10px;
+    width: 500px;
+}
+
+.create-listing-brand>video {
+    width: 40%;
+    height: auto;
+}
+
+/* Main Content Area */
+.main-content-area {
+    padding-bottom: 2rem;
+}
+
+.form-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 3fr) minmax(0, 1fr);
+    gap: 2rem;
+    align-items: flex-start;
+}
+
+.form-sections {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+/* Dummy Components & Card Styling */
+.dummy-card {
+    background-color: white;
+    border-radius: 0.5rem;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+    padding: 1.5rem;
+}
+
+.dummy-card-header {
+    margin-bottom: 1.5rem;
+}
+
+.dummy-card-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #1f2937;
+    margin: 0;
+}
+
+.card-title-icon-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.card-title-icon {
+    width: 1.5rem;
+    height: 1.5rem;
+    color: #4b5563;
+}
+
+.card-title-icon-green {
+    width: 1.5rem;
+    height: 1.5rem;
+    color: #22c55e;
+}
+
+.dummy-card-description {
+    font-size: 0.875rem;
+    color: #6b7280;
+    margin: 0.5rem 0 0;
+}
+
+.card-content-spacing {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+/* Form Elements */
+.dummy-label {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #374151;
+    display: block;
+    margin-bottom: 0.25rem;
+}
+
+.dummy-input,
+.dummy-textarea,
+.dummy-select {
+    width: 100%;
+    padding: 0.5rem 0.75rem;
+    border: 1px solid #d1d5db;
+    border-radius: 0.375rem;
+    font-size: 1rem;
+    color: #1f2937;
+    background-color: #ffffff;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.dummy-input:focus,
+.dummy-textarea:focus,
+.dummy-select:focus {
+    outline: none;
+    border-color: #2563eb;
+    box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.2);
+}
+
+.input-error {
+    border-color: #ef4444;
+}
+
+.error-message {
+    font-size: 0.75rem;
+    color: #ef4444;
+    margin-top: 0.25rem;
+}
+
+.error-message-small {
+    font-size: 0.75rem;
+    color: #ef4444;
+    margin-top: 0.25rem;
+}
+
+.input-with-icon {
+    position: relative;
+}
+
+.input-icon {
+    position: absolute;
+    left: 0.75rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #9ca3af;
+    width: 1.25rem;
+    height: 1.25rem;
+}
+
+.input-padded-left {
+    padding-left: 2.5rem;
+}
+
+.grid-2-col-md {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+}
+
+.grid-3-col {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1rem;
+}
+
+/* Description text for listing type */
+.description-text {
+    font-size: 0.75rem;
+    color: #6b7280;
+    margin-top: 0.25rem;
+}
+
+/* Image Upload Section */
+.image-upload-section {
+    display: flex;
+    flex-direction: column;
+}
+
+.image-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(10rem, 1fr));
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.image-preview-container {
+    position: relative;
+    width: 100%;
+    padding-top: 75%;
+    /* 4:3 Aspect Ratio */
+    border-radius: 0.375rem;
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.image-preview {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.remove-image-button {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    background-color: rgba(239, 68, 68, 0.8);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 1.5rem;
+    height: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.remove-image-button:hover {
+    background-color: rgba(239, 68, 68, 1);
+}
+
+.remove-icon {
+    width: 1rem;
+    height: 1rem;
+}
+
+.upload-label {
+    cursor: pointer;
+}
+
+.upload-area {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    border: 2px dashed #d1d5db;
+    border-radius: 0.5rem;
+    transition: all 0.2s ease-in-out;
+}
+
+.upload-area:hover {
+    border-color: #9ca3af;
+    background-color: #f3f4f6;
+}
+
+.upload-error-border {
+    border-color: #ef4444;
+}
+
+.upload-icon {
+    width: 2rem;
+    height: 2rem;
+    color: #9ca3af;
+}
+
+.upload-text {
+    margin-top: 0.5rem;
+    color: #6b7280;
+    font-size: 0.875rem;
+}
+
+.hidden-input {
+    display: none;
+}
+
+/* Pricing Summary */
+.pricing-section-spacing {
+    margin-bottom: 1rem;
+}
+
+.checkbox-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.dummy-checkbox {
+    width: 1rem;
+    height: 1rem;
+}
+
+.checkbox-label-icon-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #374151;
+}
+
+.checkbox-icon-yellow {
+    width: 1rem;
+    height: 1rem;
+    color: #f59e0b;
+}
+
+.pricing-info-box {
+    padding: 0.75rem;
+    background-color: #f0fdf4;
+    border-left: 4px solid #4ade80;
+    border-radius: 0.375rem;
+    margin-top: 1rem;
+}
+
+.pricing-info-title {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #16a34a;
+    margin: 0;
+}
+
+.pricing-info-text {
+    font-size: 0.75rem;
+    color: #16a34a;
+    margin: 0;
+    margin-top: 0.25rem;
+}
+
+.pricing-summary-details {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding-top: 1rem;
+    border-top: 1px dashed #d1d5db;
+}
+
+.pricing-line-item {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.875rem;
+    color: #374151;
+}
+
+.text-green-600 {
+    color: #22c55e;
+}
+
+.text-red-600 {
+    color: #ef4444;
+}
+
+.pricing-total {
+    display: flex;
+    justify-content: space-between;
+    font-weight: 600;
+    font-size: 1.125rem;
+    padding-top: 0.5rem;
+    border-top: 1px solid #d1d5db;
+}
+
+.wallet-summary {
+    padding: 0.75rem;
+    background-color: #f9fafb;
+    border-radius: 0.375rem;
+    margin-top: 1rem;
+}
+
+.wallet-balance-display {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin: 0;
+}
+
+.insufficient-funds-message {
+    font-size: 0.75rem;
+    color: #ef4444;
+    margin-top: 0.5rem;
+}
+
+/* Submit Button */
+.submit-card-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0;
+}
+
+.submit-button {
+    width: 100%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.25rem;
+    font-size: 1rem;
+    font-weight: 600;
+    color: white;
+    background-color: #22c55e;
+    border-radius: 0.375rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+    border: none;
+}
+
+.submit-button:disabled {
+    background-color: #9ca3af;
+    cursor: not-allowed;
+}
+
+.icon-left {
+    width: 1.25rem;
+    height: 1.25rem;
+}
+
+.add-funds-message {
+    font-size: 0.75rem;
+    color: #6b7280;
+    text-align: center;
+    margin-top: 0.5rem;
+}
+
+/* Loading State */
+.loading-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: #f0f4f8;
+    color: #4a5568;
+    font-family: sans-serif;
+}
+
+.loading-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}

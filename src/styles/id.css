@@ -563,10 +563,12 @@
   .header-logo {
     display: none;
   }
-  .details-grid{
+
+  .details-grid {
     flex-wrap: wrap;
   }
-  .stats-header-row{
+
+  .stats-header-row {
     flex-wrap: wrap;
   }
 }
