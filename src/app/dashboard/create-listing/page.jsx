@@ -7,29 +7,92 @@ import Link from "next/link"
 import "../../../styles/createListing.css"
 
 // Dummy components for local development
-const DummyButton = ({ children, variant, size, ...props }) => (
-  <button className={`dummy-button ${variant} ${size}`} {...props}>
+const DummyButton = ({ children, variant, size, className, ...props }) => (
+  <button className={`dummy-button ${variant || ""} ${size || ""} ${className || ""}`} {...props}>
     {children}
   </button>
 )
-const DummyCard = ({ children }) => <div className="dummy-card">{children}</div>
-const DummyCardHeader = ({ children }) => <div className="dummy-card-header">{children}</div>
-const DummyCardTitle = ({ children, ...props }) => <h2 className="dummy-card-title" {...props}>{children}</h2>
-const DummyCardContent = ({ children, ...props }) => <div className="dummy-card-content" {...props}>{children}</div>
-const DummyCardDescription = ({ children }) => <p className="dummy-card-description">{children}</p>
-const DummyInput = (props) => <input className="dummy-input" {...props} />
-const DummyLabel = (props) => <label className="dummy-label" {...props} />
-const DummyTextarea = (props) => <textarea className="dummy-textarea" {...props} />
-const DummySelect = ({ children, value, onValueChange }) => (
-  <select value={value} onChange={(e) => onValueChange(e.target.value)} className="dummy-select">
+
+const DummyCard = ({ children, className, ...props }) => (
+  <div className={`dummy-card ${className || ""}`} {...props}>
+    {children}
+  </div>
+)
+
+const DummyCardHeader = ({ children, className, ...props }) => (
+  <div className={`dummy-card-header ${className || ""}`} {...props}>
+    {children}
+  </div>
+)
+
+const DummyCardTitle = ({ children, className, ...props }) => (
+  <h2 className={`dummy-card-title ${className || ""}`} {...props}>
+    {children}
+  </h2>
+)
+
+const DummyCardContent = ({ children, className, ...props }) => (
+  <div className={`dummy-card-content ${className || ""}`} {...props}>
+    {children}
+  </div>
+)
+
+const DummyCardDescription = ({ children, className, ...props }) => (
+  <p className={`dummy-card-description ${className || ""}`} {...props}>
+    {children}
+  </p>
+)
+
+const DummyInput = ({ className, ...props }) => (
+  <input className={`dummy-input ${className || ""}`} {...props} />
+)
+
+const DummyLabel = ({ className, ...props }) => (
+  <label className={`dummy-label ${className || ""}`} {...props} />
+)
+
+const DummyTextarea = ({ className, ...props }) => (
+  <textarea className={`dummy-textarea ${className || ""}`} {...props} />
+)
+
+const DummySelect = ({ children, value, onValueChange, className, ...props }) => (
+  <select
+    value={value}
+    onChange={(e) => onValueChange(e.target.value)}
+    className={`dummy-select ${className || ""}`}
+    {...props}
+  >
     {children}
   </select>
 )
-const DummySelectTrigger = ({ children }) => <div className="dummy-select-trigger">{children}</div>
-const DummySelectContent = ({ children }) => <>{children}</>
-const DummySelectItem = ({ children, value }) => <option value={value}>{children}</option>
-const DummySelectValue = ({ children }) => <span className="dummy-select-value">{children}</span>
-const DummyCheckbox = (props) => <input type="checkbox" className="dummy-checkbox" {...props} />
+
+const DummySelectTrigger = ({ children, className, ...props }) => (
+  <div className={`dummy-select-trigger ${className || ""}`} {...props}>
+    {children}
+  </div>
+)
+
+const DummySelectContent = ({ children, className, ...props }) => (
+  <div className={`dummy-select-content ${className || ""}`} {...props}>
+    {children}
+  </div>
+)
+
+const DummySelectItem = ({ children, value, className, ...props }) => (
+  <option value={value} className={`dummy-select-item ${className || ""}`} {...props}>
+    {children}
+  </option>
+)
+
+const DummySelectValue = ({ children, className, ...props }) => (
+  <span className={`dummy-select-value ${className || ""}`} {...props}>
+    {children}
+  </span>
+)
+
+const DummyCheckbox = ({ className, ...props }) => (
+  <input type="checkbox" className={`dummy-checkbox ${className || ""}`} {...props} />
+)
 
 // Dummy authService for local development
 const dummyAuthService = {
@@ -275,7 +338,7 @@ export default function CreateListingPage() {
                     value={formData.title}
                     onChange={(e) => handleInputChange("title", e.target.value)}
                     placeholder="Beautiful 3BR home in downtown..."
-                    className={errors.title ? "input-error" : ""}
+                    className={errors.title ? "input-error dummy-imput" : "dummy-input"}
                   />
                   {errors.title && <p className="error-message">{errors.title}</p>}
                 </div>
