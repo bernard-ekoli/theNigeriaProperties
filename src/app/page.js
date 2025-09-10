@@ -1,5 +1,5 @@
 "use client"
-import React, {useState} from "react";
+import React, { useState } from "react";
 import "../styles/page.css"
 export default function Home() {
   const [isOpen, setIsOpen] = useState(false);
@@ -97,10 +97,10 @@ export default function Home() {
               <a href="/properties" className="nav-link">
                 Properties
               </a>
-              <a href="/about" className="nav-link">
+              <a href="#footer" className="nav-link">
                 About
               </a>
-              <a href="/contact" className="nav-link">
+              <a href="#footer" className="nav-link">
                 Contact
               </a>
             </nav>
@@ -108,24 +108,30 @@ export default function Home() {
               <a href="/auth" className="btn btn-outline">Sign In</a>
               <a href="/auth" className="btn btn-green">Get Started</a>
             </div>
-            <div className="header-hamburger" onClick={() => setIsOpen(!isOpen)}><HamburgerMenu /></div>
+            <div className="header-hamburger" onClick={() => setIsOpen(true)}><HamburgerMenu /></div>
           </div>
         </div>
         <div className={`header-nav-mobile ${isOpen ? 'display-flex-column' : 'display-none'}`}>
           <div className="header-nav-mobile-head display-flex">
             <span className="h-n-m-h-head hundred">TheNigeriaProperties</span>
-            <div className="h-n-m-h-content hundred" onClick={() => setIsOpen(!isOpen)}>
+            <div className="h-n-m-h-content hundred" onClick={() => setIsOpen(false)}>
               <CancelIcon />
             </div>
           </div>
           <div className="header-nav-mobile-content display-flex-column">
-            <nav>Properties</nav>
-            <nav>About</nav>
-            <nav>Contact</nav>
+            <a href="/properties" className="nav-link" onClick={() => setIsOpen(false)}>
+              Properties
+            </a>
+            <a href="#footer" className="nav-link" onClick={() => setIsOpen(false)}>
+              About
+            </a>
+            <a href="#footer" className="nav-link" onClick={() => setIsOpen(false)}>
+              Contact
+            </a>
           </div>
           <div className="header-actions-mobile display-flex-column">
-            <button>Sign In</button>
-            <button>Get Started</button>
+            <a href="/auth" className="btn btn-outline">Sign In</a>
+            <a href="/auth" className="btn btn-green">Get Started</a>
           </div>
         </div>
       </header>
@@ -364,7 +370,7 @@ export default function Home() {
       </section>
 
       {/* Footer */}
-      <footer className="footer">
+      <footer id="footer" className="footer">
         <div className="container">
           <div className="footer-flex">
             <div>

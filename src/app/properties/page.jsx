@@ -234,6 +234,9 @@ export default function PropertiesPage() {
           </div>
         )}
       </div>
+      <div className="load-more-button">
+        <button>Load More</button>
+      </div>
     </div>
   )
 }
