@@ -1,3 +1,6 @@
+*{
+    box-sizing: border-box;
+}
 .page {
     min-height: 100vh;
     background: #f9fafb;
@@ -6,18 +9,29 @@
 }
 
 .header {
-    background: white;
+    background-color: white;
     border-bottom: 1px solid #e2e8f0;
-    padding: 1rem 2rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    height: 60px;
+    overflow: hidden;
 }
 
 .logo {
+    display: flex;
     font-weight: bold;
     font-size: 1.5rem;
     color: #065f46;
+    align-items: center;
+    justify-content: flex-start;
+    background-color: white;
+    width: 200px;
+    height: 100%;
+    overflow: hidden;
+}
+.logo>video{
+    width: 100%;
 }
 
 .back-btn {
@@ -92,10 +106,16 @@ textarea.error {
     margin-top: 0.3rem;
 }
 
-.grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1rem;
+.flex {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+}
+.flex>div{
+    width: 100%;
+}
+.flex>div>input{
+    width: 100%;
 }
 
 .actions {

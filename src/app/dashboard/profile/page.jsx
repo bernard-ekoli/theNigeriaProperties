@@ -71,7 +71,9 @@ export default function ProfilePage() {
     <div className="page">
       {/* Header */}
       <header className="header">
-        <div className="logo">TheNigeriaProperties</div>
+        <div className="logo">
+          <video src="/logoTest.mp4" muted autoPlay loop></video>
+        </div>
         <a href="/dashboard" className="back-btn">Back to Dashboard</a>
       </header>
 
@@ -101,7 +103,7 @@ export default function ProfilePage() {
           )}
 
           <form onSubmit={handleSubmit}>
-            <div className="grid">
+            <div className="flex">
               <div className="field">
                 <label>First Name *</label>
                 <input
