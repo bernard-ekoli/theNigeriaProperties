@@ -127,7 +127,7 @@ export default function PropertiesPage() {
             <video src="./logoTest.mp4" autoPlay loop muted className="header-logo-video"></video>
           </div>
           <nav className="nav-links">
-            <Link href="/auth/signup" className="nav-link"><button className="button-primary">Sign Up</button></Link>
+            <Link href="/auth" className="nav-link"><button className="button-primary">Sign Up</button></Link>
           </nav>
         </div>
       </header>
