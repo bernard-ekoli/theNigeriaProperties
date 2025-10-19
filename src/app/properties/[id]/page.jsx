@@ -260,28 +260,6 @@ export default function PropertyDetailPage() {
                 <p className="description-text">{property.description}</p>
               </CardContent>
             </Card>
-
-            {/* Mortgage Calculator */}
-            {property.listingType === "sale" && (
-              <Card>
-                <CardHeader>
-                  <CardTitle><Calculator className="icon-sm mr-2" />Mortgage Calculator</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="calculator-grid">
-                    <div><Label>Loan Amount (₦)</Label><Input type="number" value={calculator.loanAmount} onChange={(e) => setCalculator((prev) => ({ ...prev, loanAmount: e.target.value }))} placeholder={property.price.toString()} /></div>
-                    <div><Label>Interest Rate (%)</Label><Input type="number" value={calculator.interestRate} onChange={(e) => setCalculator((prev) => ({ ...prev, interestRate: e.target.value }))} step="0.1" /></div>
-                    <div><Label>Loan Term (Years)</Label><Input type="number" value={calculator.loanTerm} onChange={(e) => setCalculator((prev) => ({ ...prev, loanTerm: e.target.value }))} /></div>
-                  </div>
-                  <div className="calculator-result">
-                    <p className="monthly-payment-label">Estimated Monthly Payment</p>
-                    <p className="monthly-payment-amount">
-                      {new Intl.NumberFormat("en-NG", { style: "currency", currency: "NGN" }).format(calculateMortgage())}
-                    </p>
-                  </div>
-                </CardContent>
-              </Card>
-            )}
           </div>
 
           {/* Sidebar */}

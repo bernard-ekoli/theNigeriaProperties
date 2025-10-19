@@ -3,24 +3,49 @@
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 
-// Mock authentication service to replace the external import
-const mockAuthService = {
+const AuthService = {
     signIn: async (email, password) => {
-        await new Promise((resolve) => setTimeout(resolve, 1500));
-        // Simulate successful login for any non-empty credentials
-        if (email && password) {
-            return { success: true };
+        try {
+            const res = await fetch('/api/login', {
+                method: 'POST',
+                headers: { "Content-Type": "application.json" },
+                body: JSON.stringify({ email: email, password: password })
+            })
+            const resData = await res.json()
+            if (!res.ok) {
+                return { success: false, message: resData.message || "Login failed" };
+            }
+            return resData;
         }
-        return { success: false, message: "Invalid email or password" };
+        catch (error) {
+            console.error("Login Failed: ", error)
+            return { success: false, message: "Network or server error" };
+        }
     },
     signUp: async (data) => {
-        await new Promise((resolve) => setTimeout(resolve, 1500));
-        // Simulate successful signup for any valid data
-        return { success: true, user: { ...data, id: "123" } };
-    },
+        try {
+            const res = await fetch('/api/signup', {
+                method: 'POST',
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(data)
+            });
+
+            const resData = await res.json();
+
+            if (!res.ok) {
+                return { success: false, message: resData.message || "Signup failed" };
+            }
+
+            return resData;
+
+        } catch (error) {
+            console.error("Signup error in AuthService:", error);
+            return { success: false, message: "Network or server error" };
+        }
+    }
+
 };
 
-// Recreated LoginForm without external imports
 function LoginForm({ onSwitchToSignup }) {
     const [formData, setFormData] = useState({
         email: "",
@@ -50,7 +75,7 @@ function LoginForm({ onSwitchToSignup }) {
         setIsLoading(true);
 
         try {
-            const result = await mockAuthService.signIn(
+            const result = await AuthService.signIn(
                 formData.email.trim().toLowerCase(),
                 formData.password
             );
@@ -197,7 +222,6 @@ function LoginForm({ onSwitchToSignup }) {
     );
 }
 
-// Recreated SignupForm without external imports
 function SignupForm({ onSwitchToLogin }) {
     const [formData, setFormData] = useState({
         firstName: "",
@@ -236,10 +260,6 @@ function SignupForm({ onSwitchToLogin }) {
             setError("Please enter a valid email address");
             return false;
         }
-        if (!formData.phone.trim()) {
-            setError("Phone number is required");
-            return false;
-        }
         if (!formData.password) {
             setError("Password is required");
             return false;
@@ -266,11 +286,12 @@ function SignupForm({ onSwitchToLogin }) {
         setIsLoading(true);
 
         try {
-            const result = await mockAuthService.signUp({
+            const result = await AuthService.signUp({
                 firstName: formData.firstName.trim(),
                 lastName: formData.lastName.trim(),
                 email: formData.email.trim().toLowerCase(),
                 phone: formData.phone.trim(),
+                password: formData.password,
             });
 
             if (result.success) {
@@ -377,29 +398,6 @@ function SignupForm({ onSwitchToLogin }) {
                             type="email"
                             value={formData.email}
                             onChange={(e) => handleInputChange("email", e.target.value)}
-                            required
-                            disabled={isLoading}
-                            style={{
-                                padding: "8px",
-                                border: "1px solid #d1d5db",
-                                borderRadius: "4px",
-                                outline: "none",
-                            }}
-                        />
-                    </div>
-                    <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
-                        <label
-                            htmlFor="phone"
-                            style={{ fontSize: "0.875rem", fontWeight: "500" }}
-                        >
-                            Phone Number
-                        </label>
-                        <input
-                            id="phone"
-                            type="tel"
-                            value={formData.phone}
-                            onChange={(e) => handleInputChange("phone", e.target.value)}
-                            placeholder="+234 (0) 123-456-7890"
                             required
                             disabled={isLoading}
                             style={{

@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react"
 import { useRouter } from "next/navigation"
-import { Home, ArrowLeft, Upload, X, MapPin, DollarSign, Bed, Bath, Square, Star, CheckCircle } from "lucide-react"
+import { Home, ArrowLeft, Upload, X, MapPin, Bed, Bath, Square, Star, CheckCircle } from "lucide-react"
 import Link from "next/link"
 import "../../../styles/createListing.css"
 
@@ -97,18 +97,16 @@ const DummyCheckbox = ({ className, ...props }) => (
 // Dummy authService for local development
 const dummyAuthService = {
   getCurrentUser: () => {
-    // Return a dummy user object for testing purposes
     return {
       id: "user123",
-      wallet: { balance: 100.00 },
-      // Other user data
+      wallet: { balance: 50000.0 }, // ₦50,000 test balance
     }
   },
   saveAd: (ad) => {
     console.log("Saving ad:", ad)
   },
   deductFunds: (userId, amount, description) => {
-    console.log(`Deducting $${amount} from ${userId} for ${description}`)
+    console.log(`Deducting ₦${amount} from ${userId} for ${description}`)
   },
 }
 
@@ -137,10 +135,9 @@ export default function CreateListingPage() {
   const [errors, setErrors] = useState({})
 
   useEffect(() => {
-    // Use the dummy auth service
     const currentUser = dummyAuthService.getCurrentUser()
     if (!currentUser) {
-      router.push("/auth") // This path may not exist in a dummy setup
+      router.push("/auth")
       return
     }
 
@@ -153,8 +150,6 @@ export default function CreateListingPage() {
       ...prev,
       [field]: value,
     }))
-
-    // Clear error when user starts typing
     if (errors[field]) {
       setErrors((prev) => ({
         ...prev,
@@ -172,7 +167,7 @@ export default function CreateListingPage() {
       )
       setFormData((prev) => ({
         ...prev,
-        images: [...prev.images, ...newImages].slice(0, 10), // Max 10 images
+        images: [...prev.images, ...newImages].slice(0, 10),
       }))
     }
   }
@@ -186,25 +181,22 @@ export default function CreateListingPage() {
 
   const validateForm = () => {
     const newErrors = {}
-
     if (!formData.title.trim()) newErrors.title = "Title is required"
     if (!formData.description.trim()) newErrors.description = "Description is required"
     if (!formData.price || Number.parseFloat(formData.price) <= 0) newErrors.price = "Valid price is required"
     if (!formData.address.trim()) newErrors.address = "Address is required"
     if (!formData.beds || Number.parseInt(formData.beds) < 0) newErrors.beds = "Valid number of bedrooms is required"
-    if (!formData.baths || Number.parseFloat(formData.baths) < 0)
-      newErrors.baths = "Valid number of bathrooms is required"
+    if (!formData.baths || Number.parseFloat(formData.baths) < 0) newErrors.baths = "Valid number of bathrooms is required"
     if (!formData.sqft || Number.parseInt(formData.sqft) <= 0) newErrors.sqft = "Valid square footage is required"
     if (formData.images.length === 0) newErrors.images = "At least one image is required"
-
     setErrors(newErrors)
     return Object.keys(newErrors).length === 0
   }
 
   const calculateCost = () => {
-    const baseCost = 10 // Base cost per listing
+    const baseCost = 5000 // ₦5,000 base per 30 days
     const durationMultiplier = Number.parseInt(formData.duration) / 30
-    const featuredCost = formData.featured ? 25 : 0
+    const featuredCost = formData.featured ? 2500 : 0 // ₦2,500 for featured
 
     let listingTypeMultiplier = 1
     if (formData.listingType === "rent") {
@@ -218,12 +210,10 @@ export default function CreateListingPage() {
 
   const handleSubmit = async () => {
     if (!user || !validateForm()) return
-
     const cost = calculateCost()
 
     if (user.wallet.balance < cost) {
-      // Replaced alert() with a console log for a more graceful failure.
-      console.log(`Insufficient funds. You need $${cost.toFixed(2)} but only have $${user.wallet.balance.toFixed(2)}`)
+      console.log(`Insufficient funds. You need ₦${cost.toFixed(2)} but only have ₦${user.wallet.balance.toFixed(2)}`)
       return
     }
 
@@ -252,14 +242,11 @@ export default function CreateListingPage() {
         cost,
       }
 
-      // Use the dummy auth service
       dummyAuthService.saveAd(newListing)
       dummyAuthService.deductFunds(user.id, cost, `Listing fee for "${formData.title}"`)
-
       router.push("/dashboard")
     } catch (error) {
       console.error("Error creating listing:", error)
-      // Replaced alert() with a console log
       console.error("Error creating listing. Please try again.")
     } finally {
       setIsSubmitting(false)
@@ -365,9 +352,11 @@ export default function CreateListingPage() {
                       </DummySelectTrigger>
                       <DummySelectContent>
                         <DummySelectItem value="house">House</DummySelectItem>
+                        <DummySelectItem value="land">Land</DummySelectItem>
+                        <DummySelectItem value="eventp">Event Place/Halls</DummySelectItem>
+                        <DummySelectItem value="eventp">Gardens</DummySelectItem>
                         <DummySelectItem value="condo">Condo</DummySelectItem>
                         <DummySelectItem value="townhouse">Townhouse</DummySelectItem>
-                        <DummySelectItem value="land">Land</DummySelectItem>
                       </DummySelectContent>
                     </DummySelect>
                   </div>
@@ -417,13 +406,13 @@ export default function CreateListingPage() {
                 <div>
                   <DummyLabel htmlFor="price">{getPriceLabel()}</DummyLabel>
                   <div className="input-with-icon">
-                    <DollarSign className="input-icon" />
+                    <span className="input-icon">₦</span>
                     <DummyInput
                       id="price"
                       type="number"
                       value={formData.price}
                       onChange={(e) => handleInputChange("price", e.target.value)}
-                      placeholder={formData.listingType === "sale" ? "425000" : "2500"}
+                      placeholder={formData.listingType === "sale" ? "42500000" : "250000"}
                       className={`input-padded-left ${errors.price ? "input-error" : ""}`}
                     />
                   </div>
@@ -505,43 +494,20 @@ export default function CreateListingPage() {
                   <div className="image-grid">
                     {formData.images.map((image, index) => (
                       <div key={index} className="image-preview-container">
-                        <img
-                          src={image || "/placeholder.svg"}
-                          alt={`Property ${index + 1}`}
-                          className="image-preview"
-                        />
-                        <DummyButton
-                          variant="destructive"
-                          size="sm"
-                          className="remove-image-button"
-                          onClick={() => removeImage(index)}
-                        >
-                          <X className="remove-icon" />
-                        </DummyButton>
+                        <img src={image || "/placeholder.svg"} alt={`Property ${index + 1}`} className="image-preview" />
+                        <button onClick={() => removeImage(index)} className="remove-image-btn">
+                          <X className="remove-image-icon" />
+                        </button>
                       </div>
                     ))}
+                    {formData.images.length < 10 && (
+                      <label className="upload-image-box">
+                        <Upload className="upload-icon" />
+                        <span>Add Images</span>
+                        <input type="file" multiple accept="image/*" onChange={handleImageUpload} className="hidden" />
+                      </label>
+                    )}
                   </div>
-
-                  {formData.images.length < 10 && (
-                    <div>
-                      <DummyLabel htmlFor="images" className="upload-label">
-                        <div
-                          className={`upload-area ${errors.images ? "upload-error-border" : ""}`}
-                        >
-                          <Upload className="upload-icon" />
-                          <p className="upload-text">Click to upload images</p>
-                        </div>
-                      </DummyLabel>
-                      <DummyInput
-                        id="images"
-                        type="file"
-                        multiple
-                        accept="image/*"
-                        onChange={handleImageUpload}
-                        className="hidden-input"
-                      />
-                    </div>
-                  )}
                   {errors.images && <p className="error-message">{errors.images}</p>}
                 </div>
               </DummyCardContent>
@@ -550,133 +516,62 @@ export default function CreateListingPage() {
 
           {/* Sidebar */}
           <div className="sidebar">
-            {/* Pricing Summary */}
+            {/* Listing Options */}
             <DummyCard>
               <DummyCardHeader>
                 <DummyCardTitle className="card-title-icon-wrapper">
-                  <DollarSign className="card-title-icon-green" />
-                  Pricing Summary
+                  <Star className="card-title-icon" />
+                  Listing Options
                 </DummyCardTitle>
               </DummyCardHeader>
-              <DummyCardContent className="card-content-spacing">
-                <div className="pricing-section-spacing">
-                  <DummyLabel htmlFor="duration">Listing Duration</DummyLabel>
-                  <DummySelect value={formData.duration} onValueChange={(value) => handleInputChange("duration", value)}>
+              <DummyCardContent>
+                <div className="checkbox-row">
+                  <DummyCheckbox
+                    id="featured"
+                    checked={formData.featured}
+                    onChange={(e) => handleInputChange("featured", e.target.checked)}
+                  />
+                  <DummyLabel htmlFor="featured">Feature this listing (+₦2,500)</DummyLabel>
+                </div>
+
+                <div>
+                  <DummyLabel htmlFor="duration">Duration</DummyLabel>
+                  <DummySelect
+                    value={formData.duration}
+                    onValueChange={(value) => handleInputChange("duration", value)}
+                  >
                     <DummySelectTrigger>
                       <DummySelectValue />
                     </DummySelectTrigger>
                     <DummySelectContent>
-                      <DummySelectItem value="7">7 days - $2.33</DummySelectItem>
-                      <DummySelectItem value="14">14 days - $4.67</DummySelectItem>
-                      <DummySelectItem value="30">30 days - $10.00</DummySelectItem>
-                      <DummySelectItem value="60">60 days - $20.00</DummySelectItem>
-                      <DummySelectItem value="90">90 days - $30.00</DummySelectItem>
+                      <DummySelectItem value="30">30 days (₦5,000)</DummySelectItem>
+                      <DummySelectItem value="60">60 days (₦10,000)</DummySelectItem>
+                      <DummySelectItem value="90">90 days (₦15,000)</DummySelectItem>
                     </DummySelectContent>
                   </DummySelect>
-                </div>
-
-                <div className="checkbox-item">
-                  <DummyCheckbox
-                    id="featured"
-                    checked={formData.featured}
-                    onCheckedChange={(checked) => handleInputChange("featured", checked)}
-                  />
-                  <DummyLabel htmlFor="featured" className="checkbox-label-icon-wrapper">
-                    <Star className="checkbox-icon-yellow" />
-                    Featured Listing (+$25)
-                  </DummyLabel>
-                </div>
-
-                {formData.listingType && (
-                  <div className="pricing-info-box">
-                    <p className="pricing-info-title">
-                      {formData.listingType === "sale"
-                        ? "For Sale"
-                        : formData.listingType === "rent"
-                          ? "For Rent"
-                          : "For Lease"}{" "}
-                      Listing
-                    </p>
-                    {formData.listingType === "rent" && (
-                      <p className="pricing-info-text">20% discount applied for rental listings</p>
-                    )}
-                    {formData.listingType === "lease" && (
-                      <p className="pricing-info-text">10% discount applied for lease listings</p>
-                    )}
-                  </div>
-                )}
-
-                <div className="pricing-summary-details">
-                  <div className="pricing-line-item">
-                    <span>Base Cost:</span>
-                    <span>${((10 * Number.parseInt(formData.duration)) / 30).toFixed(2)}</span>
-                  </div>
-                  {formData.listingType === "rent" && (
-                    <div className="pricing-line-item">
-                      <span>Rental Discount (20%):</span>
-                      <span className="text-green-600">
-                        -${(((10 * Number.parseInt(formData.duration)) / 30) * 0.2).toFixed(2)}
-                      </span>
-                    </div>
-                  )}
-                  {formData.listingType === "lease" && (
-                    <div className="pricing-line-item">
-                      <span>Lease Discount (10%):</span>
-                      <span className="text-green-600">
-                        -${(((10 * Number.parseInt(formData.duration)) / 30) * 0.1).toFixed(2)}
-                      </span>
-                    </div>
-                  )}
-                  {formData.featured && (
-                    <div className="pricing-line-item">
-                      <span>Featured:</span>
-                      <span>$25.00</span>
-                    </div>
-                  )}
-                  <div className="pricing-total">
-                    <span>Total:</span>
-                    <span className="text-green-600">${cost.toFixed(2)}</span>
-                  </div>
-                </div>
-
-                <div className="wallet-summary">
-                  <p className="wallet-label">Your wallet balance:</p>
-                  <p className={`wallet-balance-display ${user.wallet.balance >= cost ? "text-green-600" : "text-red-600"}`}>
-                    ${user.wallet.balance.toFixed(2)}
-                  </p>
-                  {user.wallet.balance < cost && (
-                    <p className="insufficient-funds-message">
-                      Insufficient funds. Please add ${(cost - user.wallet.balance).toFixed(2)} to your wallet.
-                    </p>
-                  )}
                 </div>
               </DummyCardContent>
             </DummyCard>
 
-            {/* Submit Button */}
+            {/* Cost Summary */}
             <DummyCard>
-              <DummyCardContent className="submit-card-content">
+              <DummyCardHeader>
+                <DummyCardTitle className="card-title-icon-wrapper">
+                  <CheckCircle className="card-title-icon" />
+                  Cost Summary
+                </DummyCardTitle>
+              </DummyCardHeader>
+              <DummyCardContent>
+                <p>Listing Fee: ₦{cost.toFixed(2)}</p>
+                <p>Your Balance: ₦{user.wallet.balance.toFixed(2)}</p>
+                {!canAfford && <p className="error-message">Insufficient funds in your wallet</p>}
                 <DummyButton
                   onClick={handleSubmit}
                   disabled={isSubmitting || !canAfford}
                   className="submit-button"
                 >
-                  {isSubmitting ? (
-                    "Creating Listing..."
-                  ) : canAfford ? (
-                    <>
-                      <CheckCircle className="icon-left" />
-                      Create Listing
-                    </>
-                  ) : (
-                    "Insufficient Funds"
-                  )}
+                  {isSubmitting ? "Processing..." : `Pay ₦${cost.toFixed(2)} & Publish`}
                 </DummyButton>
-                {!canAfford && (
-                  <p className="add-funds-message">
-                    Add funds to your wallet to create this listing
-                  </p>
-                )}
               </DummyCardContent>
             </DummyCard>
           </div>

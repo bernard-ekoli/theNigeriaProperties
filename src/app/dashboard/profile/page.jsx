@@ -160,22 +160,6 @@ export default function ProfilePage() {
               />
             </div>
 
-            <div className="field">
-              <label>Bio</label>
-              <textarea
-                value={formData.bio}
-                onChange={(e) => handleInputChange("bio", e.target.value)}
-                className={errors.bio ? "error" : ""}
-                placeholder="Tell us about yourself..."
-                rows={4}
-                maxLength={500}
-              />
-              <div className="bio-footer">
-                {errors.bio && <span className="error-text">{errors.bio}</span>}
-                <small>{formData.bio.length}/500 characters</small>
-              </div>
-            </div>
-
             <div className="actions">
               <a href="/dashboard" className="btn outline">Cancel</a>
               <button type="submit" disabled={loading} className="btn primary">
